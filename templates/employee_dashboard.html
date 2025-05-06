@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background-color: #dc3545;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Employee Dashboard</h1>
+    <p>Welcome, {{ session['user'] }}!</p>
+    <div class="container">
+        <h2>Clock In</h2>
+        <div class="form-group">
+            <label for="clock_in_emp_id">Employee ID:</label>
+            <input type="text" id="clock_in_emp_id">
+        </div>
+        <button onclick="clockIn()">Clock In</button>
+    </div>
+
+    <br>
+    <div class="container">
+        <h2>Clock Out</h2>
+        <div class="form-group">
+            <label for="clock_out_emp_id">Employee ID:</label>
+            <input type="text" id="clock_out_emp_id">
+        </div>
+        <button onclick="clockOut()">Clock Out</button>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <script>
+        function showMessage(message, isError = false) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = message;
+            messageDiv.style.color = isError ? 'red' : 'green';
+        }
+
+
+        function clockIn() {
+            const emp_id = document.getElementById('clock_in_emp_id').value;
+
+            fetch('/clock_in', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `emp_id=${emp_id}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage(data.message);
+                    } else {
+                        showMessage(data.message, true);
+                    }
+                });
+        }
+
+        function clockOut() {
+            const emp_id = document.getElementById('clock_out_emp_id').value;
+
+            fetch('/clock_out', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `emp_id=${emp_id}`
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showMessage(data.message);
+                    } else {
+                        showMessage(data.message, true);
+                    }
+                });
+        }
+    </script>
+
+</body>
+
+</html>

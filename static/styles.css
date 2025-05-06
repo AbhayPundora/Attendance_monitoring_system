@@ -1,132 +1,93 @@
-/* styles.css */
+/* login */
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    max-width: 400px;
-    margin: 100px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input[type="text"],
-  .form-group input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .form-group button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .form-group button:hover {
-    background-color: #45a049;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .radio-group {
-    margin-top: 10px;
-  }
-  
-  .radio-group label {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  .dashboard {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .dashboard h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .dashboard ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .dashboard li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .dashboard li:last-child {
-    border-bottom: none;
-  }
-  
-  .dashboard li .class-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dashboard li .class-info .class-name {
-    margin-left: 10px;
-  }
-  
-  .dashboard li .attendance-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dashboard li .attendance-info .attendance-label {
-    margin-right: 10px;
-  }
-  
-  .logout {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .logout a {
-    color: #4CAF50;
-    text-decoration: none;
-  }
-  
-  .logout a:hover {
-    text-decoration: underline;
-  }
-  
+.login {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.login form {
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+.login input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login input[type="radio"] {
+  margin-right: 8px;
+}
+
+.login button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login button:hover {
+  background-color: #0056b3;
+}
+
+.login ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.login li {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.login li.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.login li.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.radio {
+  display: flex;
+  gap: 5px;
+}

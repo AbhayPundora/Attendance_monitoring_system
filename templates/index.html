@@ -1,98 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Attendance Monitoring System</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <style>
-    body {
-      background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
-      background-size: cover;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      background: rgba(0, 0, 0, 0.6);
-      margin: 3em auto 5em;
-      padding: 1em;
-      color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    }
-    .section-title {
-      margin: 0;
-      padding: 1em 0;
-      text-align: center;
-    }
-    .login-btn {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .login-btn:hover {
-      background-color: #0069d9;
-    }
-    .features-section {
-      margin: 3em auto 5em;
-      padding: 2em;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-      text-align: center;
-      color: #fff;
-    }
-    .features-title {
-      margin: 0 0 2em;
-      color: #fff;
-    }
-    .features-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 1em 0;
-    }
-    .features-list li {
-      margin-bottom: 1em;
-      display: flex;
-      align-items: center;
-    }
-    .features-list li:before {
-      content: "\2022";
-      color: #007bff;
-      font-weight: bold;
-      display: inline-block;
-      width: 1em;
-      margin-right: 0.5em;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
 </head>
+
 <body>
+
+  <h1>Attendance Management System</h1>
+
   <div class="container">
-    <h1 class="section-title">Attendance Monitoring System</h1>
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="text-center">
-          <a href="{{ url_for('login') }}" class="login-btn">Login</a>
-        </div>
-      </div>
+    <h2>Add Employee</h2>
+    <div class="form-group">
+      <label for="emp_id">Employee ID:</label>
+      <input type="text" id="emp_id" name="emp_id">
     </div>
-    <div class="features-section">
-      <h2 class="features-title">Features of the Attendance Monitoring System:</h2>
-      <ul class="features-list">
-        <li>Efficient and Automated Attendance Tracking</li>
-        <li>Real-time Attendance Reporting</li>
-        <li>Easy Integration with Existing Systems</li>
-        <li>User-friendly Interface</li>
-        <li>Secure Data Management</li>
-      </ul>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name">
     </div>
+    <div class="form-group">
+      <label for="dept">Department:</label>
+      <input type="text" id="dept" name="dept">
+    </div>
+    <button onclick="addEmployee()">Add Employee</button>
   </div>
+
+  <div class="container">
+    <h2>Clock In</h2>
+    <div class="form-group">
+      <label for="clock_in_emp_id">Employee ID:</label>
+      <input type="text" id="clock_in_emp_id">
+    </div>
+    <button onclick="clockIn()">Clock In</button>
+  </div>
+
+  <div class="container">
+    <h2>Clock Out</h2>
+    <div class="form-group">
+      <label for="clock_out_emp_id">Employee ID:</label>
+      <input type="text" id="clock_out_emp_id">
+    </div>
+    <button onclick="clockOut()">Clock Out</button>
+  </div>
+
+  <div class="message" id="message"></div>
+
+  <script>
+    function showMessage(message, isError = false) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.innerHTML = message;
+      messageDiv.style.color = isError ? 'red' : 'green';
+    }
+
+    function addEmployee() {
+      const emp_id = document.getElementById('emp_id').value;
+      const name = document.getElementById('name').value;
+      const dept = document.getElementById('dept').value;
+
+      fetch('/add_employee', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `emp_id=${emp_id}&name=${name}&dept=${dept}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            showMessage(data.message);
+          } else {
+            showMessage(data.message, true);
+          }
+        });
+    }
+
+    function clockIn() {
+      const emp_id = document.getElementById('clock_in_emp_id').value;
+
+      fetch('/clock_in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `emp_id=${emp_id}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            showMessage(data.message);
+          } else {
+            showMessage(data.message, true);
+          }
+        });
+    }
+
+    function clockOut() {
+      const emp_id = document.getElementById('clock_out_emp_id').value;
+
+      fetch('/clock_out', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `emp_id=${emp_id}`
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'success') {
+            showMessage(data.message);
+          } else {
+            showMessage(data.message, true);
+          }
+        });
+    }
+  </script>
 </body>
+
 </html>
