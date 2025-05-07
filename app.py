@@ -1,10 +1,20 @@
 from flask import Flask, render_template, request, redirect, flash, url_for , session, jsonify
+import pyttsx3
 from datetime import datetime
 import csv
 import os
 
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+
+tts_engine = pyttsx3.init()
+
+def play_voice_message(message):
+   
+    tts_engine.say(message)
+    tts_engine.runAndWait()
+
 
 # Constants
 OFFICE_START_TIME = datetime.strptime("10:00", "%H:%M")
@@ -75,7 +85,22 @@ def employee_dashboard():
         return redirect(url_for('login'))
     return render_template('employee_dashboard.html')
 
+@app.route('/preview_employees', methods=['GET'])
+def preview_employees():
+    try:
+        data = []
+        with open(EMPLOYEE_FILE, 'r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                data.append(row)
 
+        # Render the data in an HTML template
+        return render_template('preview_employees.html', data=data)
+    except FileNotFoundError:
+        return render_template('error.html', message="Employee file not found.")
+    except Exception as e:
+        return render_template('error.html', message=str(e))
+    
 @app.route('/add_employee', methods=['GET', 'POST'])
 def add_employee():
     if request.method == 'POST':

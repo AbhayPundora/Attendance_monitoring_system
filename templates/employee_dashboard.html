@@ -111,7 +111,7 @@
             <label for="clock_in_emp_id">Employee ID:</label>
             <input type="text" id="clock_in_emp_id">
         </div>
-        <button onclick="clockIn()">Clock In</button>
+        <button id="checkInButton" onclick="clockIn()">Clock In</button>
     </div>
 
     <br>
@@ -121,8 +121,11 @@
             <label for="clock_out_emp_id">Employee ID:</label>
             <input type="text" id="clock_out_emp_id">
         </div>
-        <button onclick="clockOut()">Clock Out</button>
+        <button id="checkOutButton" onclick="clockOut()">Clock Out</button>
     </div>
+
+    <audio id="checkInSound" src="../static/voice.wav" preload="auto"></audio>
+    <audio id="checkOutSound" src="../static/voice.wav" preload="auto"></audio>
 
     <div class="message" id="message"></div>
 
@@ -130,6 +133,23 @@
     <a href="{{ url_for('logout') }}">Logout</a>
 
     <script>
+
+        // Get references to audio elements
+        const checkInSound = document.getElementById('checkInSound');
+        const checkOutSound = document.getElementById('checkOutSound');
+
+        // Event listeners for buttons
+        document.getElementById('checkInButton').addEventListener('click', () => {
+            checkInSound.play(); // Play the check-in sound
+        });
+
+        document.getElementById('checkOutButton').addEventListener('click', () => {
+            checkOutSound.play(); // Play the check-out sound
+        });
+
+
+
+
         function showMessage(message, isError = false) {
             const messageDiv = document.getElementById('message');
             messageDiv.innerHTML = message;
