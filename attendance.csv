@@ -1,6 +1,6 @@
-Employee ID,Name,Date,Time,Login/Logout,
+Employee ID,Name,Date,Time,Status,
 3,Avantika,2025-05-07,15:44,Late 
-5,Ayushi Sharma,2025-05-07,15:44,Clock Out,
+5,Ayushi Sharma,2025-05-07,15:44,On Time,
 8,Mohd Shaan,2025-05-07,16:20,Late
-8,Mohd Shaan,2025-05-07,16:20,Clock Out
+8,Mohd Shaan,2025-05-07,16:20,On Time
 8,Mohd Shaan,2025-05-08,11:07,Late

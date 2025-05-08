@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,6 +64,249 @@
     {% else %}
     <p>No attendance data available.</p>
     {% endif %}
+</body>
+
+</html> -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Attendance Data</h1>
+
+     Filter Form 
+    <form method="POST" action="/filter_attendance">
+        <label for="employee_id">Employee ID:</label>
+        <input type="text" id="employee_id" name="employee_id" placeholder="Enter Employee ID">
+
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" placeholder="Enter Date (YYYY-MM-DD)">
+
+        <label for="late_attendance">Late Attendance:</label>
+        <select id="late_attendance" name="late_attendance">
+            <option value="">-- Select Status --</option>
+            <option value="Late">Late</option>
+            <option value="On Time">On Time</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if data %}
+    <h2>Filtered Attendance Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['Employee ID'] }}</td>
+                <td>{{ row['Name'] }}</td>
+                <td>{{ row['Date'] }}</td>
+                <td>{{ row['Time'] }}</td>
+                <td>{{ row['Status'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No attendance data found based on the filters.</p>
+    {% endif %}
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input,
+        select {
+            margin-right: 20px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        .download-btn {
+            background-color: #4CAF50;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+
+        .prev-att {
+            display: flex;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="prev-att">
+        <h1>Attendance Data</h1>
+        <a href="/download">
+            <button class="download-btn">Download Attendance</button>
+        </a>
+    </div>
+    <!-- Filter Form -->
+    <form method="POST" action="/filter_attendance">
+        <label for="employee_id">Employee ID:</label>
+        <input type="text" id="employee_id" name="employee_id" placeholder="Enter Employee ID">
+
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" placeholder="Enter Date (YYYY-MM-DD)">
+
+        <label for="late_attendance">Late Attendance:</label>
+        <select id="late_attendance" name="late_attendance">
+            <option value="">-- Select Status --</option>
+            <option value="Late">Late</option>
+            <option value="On Time">On Time</option>
+        </select>
+
+        <button type="submit">Filter</button>
+
+    </form>
+
+
+
+    <!-- Attendance Table -->
+    {% if data and data|length > 0 %}
+    {% if filter_applied %}
+    <h2>Filtered Attendance Records</h2>
+    {% else %}
+    <h2>All Attendance Records</h2>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                {% for header in data[0] %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data[1:] %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No attendance data available.</p>
+    {% endif %}
+
+
+
 </body>
 
 </html>

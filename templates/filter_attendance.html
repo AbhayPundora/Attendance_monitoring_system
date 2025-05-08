@@ -4,56 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Late Attendance</title>
+    <title>Filtered Attendance Records</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
         }
 
-        th,
-        td {
-            border: 1px solid black;
+        table th,
+        table td {
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
 
-        th {
+        table th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
 
 <body>
-    <h1>Late Employees</h1>
-    <a href="/preview_attendance">Back to Attendance Preview</a>
+    <h1>Filtered Attendance Records</h1>
+
+    {% if data and data|length > 0 %}
     <table>
         <thead>
             <tr>
                 <th>Employee ID</th>
                 <th>Name</th>
                 <th>Date</th>
+                <th>Time</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            {% if data %}
             {% for row in data %}
             <tr>
-                <td>{{ row["Employee ID"] }}</td>
-                <td>{{ row["Name"] }}</td>
-                <td>{{ row["Date"] }}</td>
-
-                <td>{{ row["Status"] }}</td>
+                <td>{{ row['Employee ID'] }}</td>
+                <td>{{ row['Name'] }}</td>
+                <td>{{ row['Date'] }}</td>
+                <td>{{ row['Time'] }}</td>
+                <td>{{ row['Status'] }}</td>
             </tr>
             {% endfor %}
-            {% else %}
-            <tr>
-                <td colspan="6">No late employees found.</td>
-            </tr>
-            {% endif %}
         </tbody>
     </table>
+    {% else %}
+    <p>No attendance records found.</p>
+    {% endif %}
 </body>
 
 </html>

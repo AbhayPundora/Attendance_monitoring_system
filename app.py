@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, url_for , session, jsonify
+from flask import Flask, render_template, request, redirect, flash, url_for , session, jsonify, send_file
 import pyttsx3
 from datetime import datetime
 import csv
@@ -71,6 +71,10 @@ def logout():
     flash("Logged out successfully.", "info")
     return redirect(url_for('login'))
 
+@app.route('/download')
+def download_file():
+    return send_file('attendance.csv', as_attachment=True)
+
 @app.route('/admin_dashboard')
 def admin_dashboard():
     if 'user' not in session or session.get('role') != 'admin':
@@ -118,7 +122,40 @@ def preview_attendance():
     except Exception as e:
         return render_template('error.html', message=str(e))
     
-    
+
+@app.route("/filter_attendance", methods=["GET", "POST"])
+def filter_attendance():
+    if request.method == "POST":
+        # Get the form data for filtering
+        employee_id = request.form.get("employee_id", "").strip()
+        date = request.form.get("date", "").strip()
+        late_attendance = request.form.get("late_attendance", "").strip()
+
+        filtered_employees = []
+
+        # Open the attendance file to filter data
+        with open(ATTENDANCE_FILE, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # Filter based on employee ID
+                if employee_id and row["Employee ID"] != employee_id:
+                    continue
+                # Filter based on date
+                if date and row["Date"] != date:
+                    continue
+                # Filter based on late attendance status
+                if late_attendance and row["Status"].lower() != late_attendance.lower():
+                    continue
+
+                filtered_employees.append(row)
+                print(filtered_employees)
+        # Render the filtered data in the same attendance preview template
+        return render_template("filter_attendance.html", data=filtered_employees)
+
+    # If GET request, just render the page without any filters applied
+    return render_template("filter_attendance.html")
+
+
 @app.route('/add_employee', methods=['GET', 'POST'])
 def add_employee():
     if request.method == 'POST':
@@ -256,21 +293,6 @@ def employee_details():
 
     return render_template('employee_details.html')
 
-@app.route("/filter_attendance", methods=["GET", "POST"])
-def filter_attendance():
-    if request.method == "POST":
-        late_employees = []
-
-        with open(ATTENDANCE_FILE, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                if row["Status"].lower() == "late":
-                    late_employees.append(row)
-
-        return render_template("filter_attendance.html", data=late_employees)
-    
-    return "This page only accepts POST requests."
-
 
 @app.route('/clock_in', methods=['POST'])
 def clock_in():
@@ -323,4 +345,4 @@ def clock_out():
         return jsonify({"status": "error", "message": "Employee ID not found."})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False)
