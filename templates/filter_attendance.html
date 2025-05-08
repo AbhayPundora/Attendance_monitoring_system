@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Late Attendance</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Late Employees</h1>
+    <a href="/preview_attendance">Back to Attendance Preview</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+            {% for row in data %}
+            <tr>
+                <td>{{ row["Employee ID"] }}</td>
+                <td>{{ row["Name"] }}</td>
+                <td>{{ row["Date"] }}</td>
+
+                <td>{{ row["Status"] }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">No late employees found.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</body>
+
+</html>

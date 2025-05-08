@@ -1,41 +1,6 @@
-Employee ID,Name,Date,Time,Status
-7,abhay,2025-05-05,11:38,Clock Out
-15,sameer,2025-05-05,11:39,Late
-10,prince,2025-05-05,14:22,Late
-10,prince,2025-05-05,14:23,Clock Out
-15,sameer,2025-05-05,14:35,Late
-15,sameer,2025-05-05,14:35,Clock Out
-12,shuaib,2025-05-05,14:39,Late
-12,shuaib,2025-05-05,14:39,Late
-12,shuaib,2025-05-05,14:39,Late
-12,shuaib,2025-05-05,14:39,Clock Out
-15,sameer,2025-05-06,10:52,Late
-15,sameer,2025-05-06,10:54,Late
-15,sameer,2025-05-06,10:54,Clock Out
-15,sameer,2025-05-06,11:54,Late
-15,sameer,2025-05-06,11:54,Clock Out
-15,sameer,2025-05-06,12:40,Late
-15,sameer,2025-05-06,12:40,Clock Out
-5,shaan,2025-05-06,13:03,Late
-5,shaan,2025-05-06,13:03,Clock Out
-5,shaan,2025-05-06,13:28,Late
-5,shaan,2025-05-06,13:28,Clock Out
-15,sameer,2025-05-06,14:47,Late
-15,sameer,2025-05-06,14:47,Clock Out
-1,jonas,2025-05-06,15:30,Late
-1,jonas,2025-05-06,15:30,Clock Out
-1,jonas,2025-05-06,16:04,Late
-1,jonas,2025-05-06,16:04,Late
-1,jonas,2025-05-06,16:04,Clock Out
-1,jonas,2025-05-06,16:29,Late
-1,jonas,2025-05-06,16:30,Late
-1,jonas,2025-05-06,16:31,Late
-1,jonas,2025-05-06,16:31,Late
-1,jonas,2025-05-06,16:33,Late
-1,jonas,2025-05-06,16:38,Late
-1,jonas,2025-05-06,16:39,Late
-1,jonas,2025-05-06,16:41,Late
-1,jonas,2025-05-06,16:41,Late
-15,sameer,2025-05-06,16:42,Late
-15,sameer,2025-05-06,16:45,Late
-15,sameer,2025-05-06,16:45,Clock Out
+Employee ID,Name,Date,Time,Login/Logout,
+3,Avantika,2025-05-07,15:44,Late 
+5,Ayushi Sharma,2025-05-07,15:44,Clock Out,
+8,Mohd Shaan,2025-05-07,16:20,Late
+8,Mohd Shaan,2025-05-07,16:20,Clock Out
+8,Mohd Shaan,2025-05-08,11:07,Late

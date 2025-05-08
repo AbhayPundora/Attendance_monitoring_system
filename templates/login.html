@@ -10,7 +10,9 @@
 </head>
 
 <body>
+
     <div class="login">
+        <img src="../static/logo.png" alt="vistotech logo">
         <h1>Login</h1>
         <form method="POST" action="{{ url_for('login') }}">
             <label for="username">Username:</label>
@@ -30,7 +32,7 @@
             <button type="submit">Login</button>
         </form>
 
-        <!-- Display flash messages -->
+        <!-- Display flash messages
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul>
@@ -39,7 +41,7 @@
             {% endfor %}
         </ul>
         {% endif %}
-        {% endwith %}
+        {% endwith %} -->
     </div>
 </body>
 
