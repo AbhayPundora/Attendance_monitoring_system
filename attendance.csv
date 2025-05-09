@@ -1,6 +1,3 @@
-Employee ID,Name,Date,CheckIn_Time,late_or_on_time, CheckOut_Time ,checkout
-60,Abhay Pundora,2025-05-09,10:38,Late
-
-
-10,Kushagra Sharma,2025-05-09,11:04,Late
-3,Avantika,2025-05-09,11:13,Late
+Employee ID,Name,Date,CheckIn_Time,late_or_on_time ,checkout,CheckOut_Time
+60,Abhay Pundora,2025-05-09,12:49,Late,checkout,12:49:48
+30,Khushi Rana,2025-05-09,12:52,Late,checkout,12:52:06

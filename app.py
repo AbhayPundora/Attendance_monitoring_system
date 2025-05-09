@@ -30,7 +30,7 @@ if not os.path.exists(EMPLOYEE_FILE):
 if not os.path.exists(ATTENDANCE_FILE):
     with open(ATTENDANCE_FILE, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["Employee ID", "Name", "Date", "CheckIn_Time", "late_or_on_time","CheckOut_Time" ,"checkout" ])
+        writer.writerow(["Employee ID", "Name", "Date", "CheckIn_Time", "late_or_on_time", "CheckOut_Time" ,"checkout" ])
 
 # Routes
 
@@ -321,66 +321,81 @@ def clock_in():
 
 
 
-@app.route('/clock_out', methods=['POST'])
-def clock_out():
-    emp_id = request.form['emp_id']
-    found = False
-
-    with open(EMPLOYEE_FILE, 'r') as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            if row["Employee ID"] == emp_id:
-                found = True
-                now = datetime.now()
-                date = now.strftime("%Y-%m-%d")
-                time = now.strftime("%H:%M")
-
-                with open(ATTENDANCE_FILE, 'a', newline='') as att_file:
-                    writer = csv.writer(att_file)
-                    writer.writerow([emp_id, row["Name"], date, time ,"Clock Out"])
-
-                return jsonify({"status": "success", "message": f"{row['Name']} clocked out at {time}"})
-
-    if not found:
-        return jsonify({"status": "error", "message": "Employee ID not found."})
-
-
 # @app.route('/clock_out', methods=['POST'])
 # def clock_out():
-#     # Get the current date and time
-#     current_date = datetime.now().strftime('%Y-%m-%d')
-#     current_time = datetime.now().strftime('%H:%M:%S')
+#     emp_id = request.form['emp_id']
+#     found = False
 
-#     # Get name from the request (assuming it's sent as JSON)
-#     data = request.get_json()
-#     employee_id = data.get('Employee ID')
-
-#     if not employee_id:
-#         return jsonify({"error": "Id is required"}), 400
-
-#     # Read the CSV file
-#     records = []
-#     record_found = False
-#     with open(ATTENDANCE_FILE, mode='r') as file:
+#     with open(EMPLOYEE_FILE, 'r') as file:
 #         reader = csv.DictReader(file)
 #         for row in reader:
-#             # If Name and Date match, update CheckOut_Time and checkout status
-#             if row['Employee ID'] == employee_id and row['Date'] == current_date:
-#                 row['CheckOut_Time'] = current_time
-#                 row['checkout'] = 'checkout'
-#                 record_found = True
-#             records.append(row)
+#             if row["Employee ID"] == emp_id:
+#                 found = True
+#                 now = datetime.now()
+#                 date = now.strftime("%Y-%m-%d")
+#                 time = now.strftime("%H:%M")
 
-#     if not record_found:
-#         return jsonify({"error": "Record not found for the given name and date"}), 404
+#                 with open(ATTENDANCE_FILE, 'a', newline='') as att_file:
+#                     writer = csv.writer(att_file)
+#                     writer.writerow([emp_id, row["Name"], date, time ,"Clock Out"])
 
-#     # Write updated records back to the CSV file
-#     with open(ATTENDANCE_FILE, mode='w', newline='') as file:
-#         writer = csv.DictWriter(file, fieldnames=records[0].keys())
-#         writer.writeheader()
-#         writer.writerows(records)
+#                 return jsonify({"status": "success", "message": f"{row['Name']} clocked out at {time}"})
 
-#     return jsonify({"message": "Checked out successfully", "CheckOut_Time": current_time}), 200
+#     if not found:
+#         return jsonify({"status": "error", "message": "Employee ID not found."})
+
+
+@app.route('/clock_out', methods=['POST'])
+def clock_out():
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    current_time = datetime.now().strftime('%H:%M:%S')
+
+    # Parse Employee ID from the request body
+    data = request.form if request.form else request.get_json()
+    employee_id = data.get('emp_id')
+
+    if not employee_id:
+        return jsonify({"message": "Employee ID is required", "status": "error"}), 400
+
+    # Read and update the CSV file
+    records = []
+    fieldnames = []
+    record_found = False
+
+    try:
+        with open(ATTENDANCE_FILE, mode='r') as file:
+            reader = csv.DictReader(file)
+            fieldnames = reader.fieldnames  # Get the headers dynamically
+            for row in reader:
+                # Check if the Employee ID and Date match
+                if row['Employee ID'] == employee_id and row['Date'] == current_date:
+                    row['CheckOut_Time'] = current_time
+                    row['checkout'] = 'checkout'
+                    record_found = True
+                records.append(row)
+
+        # If no matching record, return error
+        if not record_found:
+            return jsonify({"message": "Please clock in first.", "status": "error"}), 404
+
+        # Add new fields to fieldnames if necessary
+        if 'CheckOut_Time' not in fieldnames:
+            fieldnames.append('CheckOut_Time')
+        if 'checkout' not in fieldnames:
+            fieldnames.append('checkout')
+
+        # Write the updated data back to the CSV
+        with open(ATTENDANCE_FILE, mode='w', newline='') as file:
+            writer = csv.DictWriter(file, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(records)
+
+        return jsonify({"message": "Checked out successfully.", "CheckOut_Time": current_time, "status": "success"}), 200
+
+    except FileNotFoundError:
+        return jsonify({"message": "Attendance file not found.", "status": "error"}), 500
+    except Exception as e:
+        return jsonify({"message": str(e), "status": "error"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
