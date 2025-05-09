@@ -1,6 +1,6 @@
-Employee ID,Name,Date,Time,Status,
-3,Avantika,2025-05-07,15:44,Late 
-5,Ayushi Sharma,2025-05-07,15:44,On Time,
-8,Mohd Shaan,2025-05-07,16:20,Late
-8,Mohd Shaan,2025-05-07,16:20,On Time
-8,Mohd Shaan,2025-05-08,11:07,Late
+Employee ID,Name,Date,CheckIn_Time,late_or_on_time, CheckOut_Time ,checkout
+60,Abhay Pundora,2025-05-09,10:38,Late
+
+
+10,Kushagra Sharma,2025-05-09,11:04,Late
+3,Avantika,2025-05-09,11:13,Late

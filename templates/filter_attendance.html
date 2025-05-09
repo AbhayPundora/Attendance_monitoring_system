@@ -48,7 +48,8 @@
                 <th>Name</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Status</th>
+                <th>late/on_time</th>
+                <th>checkout</th>
             </tr>
         </thead>
         <tbody>
@@ -57,8 +58,10 @@
                 <td>{{ row['Employee ID'] }}</td>
                 <td>{{ row['Name'] }}</td>
                 <td>{{ row['Date'] }}</td>
-                <td>{{ row['Time'] }}</td>
-                <td>{{ row['Status'] }}</td>
+                <td>{{ row['CheckIn_Time'] }}</td>
+                <td>{{ row['late_or_on_time'] }}</td>
+                <td>{{ row['CheckOut_Time'] }}</td>
+                <td>{{ row['checkout'] }}</td>
             </tr>
             {% endfor %}
         </tbody>

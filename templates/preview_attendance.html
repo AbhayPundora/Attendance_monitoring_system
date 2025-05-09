@@ -241,20 +241,30 @@
             background-color: #45a049;
         }
 
-        .prev-att {
-            display: flex;
+        h1 {
+            text-align: center;
             padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        a {
+            display: block;
+            text-align: end;
         }
     </style>
 </head>
 
 <body>
-    <div class="prev-att">
-        <h1>Attendance Data</h1>
-        <a href="/download">
-            <button class="download-btn">Download Attendance</button>
-        </a>
-    </div>
+
+    <a href="/download">
+        <button class="download-btn">Download Attendance</button>
+    </a>
+    <h1 class="prev-att">Attendance Data</h1>
+
     <!-- Filter Form -->
     <form method="POST" action="/filter_attendance">
         <label for="employee_id">Employee ID:</label>
@@ -281,7 +291,7 @@
     {% if filter_applied %}
     <h2>Filtered Attendance Records</h2>
     {% else %}
-    <h2>All Attendance Records</h2>
+    <h2 class="h2">All Attendance Records</h2>
     {% endif %}
     <table>
         <thead>
