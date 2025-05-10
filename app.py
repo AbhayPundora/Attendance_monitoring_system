@@ -1,19 +1,19 @@
 from flask import Flask, render_template, request, redirect, flash, url_for , session, jsonify, send_file
-import pyttsx3
 from datetime import datetime
 import csv
 import os
+import webbrowser
+from threading import Timer
 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-tts_engine = pyttsx3.init()
 
-def play_voice_message(message):
-   
-    tts_engine.say(message)
-    tts_engine.runAndWait()
+def open_browser():
+    webbrowser.open_new("http://127.0.0.1:5000")
+
+
 
 
 # Constants
@@ -397,5 +397,6 @@ def clock_out():
     except Exception as e:
         return jsonify({"message": str(e), "status": "error"}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+if __name__ == "__main__":
+    Timer(1, open_browser).start()  # Open the browser after a 1-second delay
+    app.run()

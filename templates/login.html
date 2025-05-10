@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,9 @@
 <body>
 
     <div class="login">
-        <img src="../static/logo.png" alt="vistotech logo">
+        <div style="display: block; width: 100%;">
+            <img src="../static/logo.png" alt="vistotech logo">
+        </div>
         <h1>Login</h1>
         <form method="POST" action="{{ url_for('login') }}">
             <label for="username">Username:</label>
@@ -32,7 +34,7 @@
             <button type="submit">Login</button>
         </form>
 
-        <!-- Display flash messages
+         Display flash messages
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <ul>
@@ -41,7 +43,54 @@
             {% endfor %}
         </ul>
         {% endif %}
-        {% endwith %} -->
+        {% endwith %} 
+    </div>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login">
+            <div class="logo-container">
+                <img src="../static/logo.png" alt="vistotech logo">
+            </div>
+            <h1>Login</h1>
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="input-container">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                </div>
+                <div class="input-container">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <div class="radio-container">
+                    <label>Select Role</label>
+                    <div class="radio">
+                        <input type="radio" id="admin" name="role" value="admin" required>
+                        <label for="admin">Admin</label>
+                        <input type="radio" id="employee" name="role" value="employee" required>
+                        <label for="employee">Employee</label>
+                    </div>
+                </div>
+                <div class="form-footer">
+                    <button type="submit">Login</button>
+
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 

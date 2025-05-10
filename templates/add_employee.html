@@ -7,7 +7,7 @@
     <title>Add Employee</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,77 +15,91 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
+            background: linear-gradient(135deg, #1a1a1a, #3d3d3d);
+
+            color: #ffffff;
         }
 
         h1 {
-            color: #333;
+            font-size: 2rem;
             margin-bottom: 20px;
+            color: #e0e0e0;
+            text-transform: uppercase;
         }
 
         form {
-            background: #ffffff;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             width: 100%;
             max-width: 400px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: bold;
-            color: #555;
+            color: #bdbdbd;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 12px 0;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            outline: none;
         }
 
         button {
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
+            padding: 12px;
+            background: linear-gradient(135deg, #4a90e2, #9013fe);
+            color: #ffffff;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
         }
 
         a {
             display: inline-block;
             text-decoration: none;
-            color: #fff;
-            background-color: #6c757d;
+            color: #ffffff;
+            background-color: #424242;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             margin-top: 20px;
             text-align: center;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s;
         }
 
         a:hover {
-            background-color: #5a6268;
+            background-color: #616161;
+            transform: translateY(-2px);
         }
-
-
 
         .message {
             font-weight: bold;
-            color: rgb(30, 163, 61);
+            color: #76ff03;
+            text-align: center;
+            margin-top: 15px;
         }
     </style>
 </head>

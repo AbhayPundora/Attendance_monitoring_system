@@ -1,3 +1,11 @@
-Employee ID,Name,Date,CheckIn_Time,late_or_on_time ,checkout,CheckOut_Time
+Employee ID,Name,Date,CheckIn_Time,late_or_on_time,checkout,CheckOut_Time
 60,Abhay Pundora,2025-05-09,12:49,Late,checkout,12:49:48
 30,Khushi Rana,2025-05-09,12:52,Late,checkout,12:52:06
+58,Sameer Ahmad,2025-05-09,14:29,Late,checkout,14:29:16
+17,Aman Semwal,2025-05-10,11:36,Late,checkout,11:37:23
+45,Shubham Dhyani,2025-05-10,11:37,Late,checkout,11:38:09
+60,Abhay Pundora,2025-05-10,11:37,Late,checkout,11:37:43
+55,Snehal Tounk,2025-05-10,11:37,Late,checkout,11:37:53
+57,lovepreet Kaur,2025-05-10,11:37,Late,checkout,11:38:00
+45,Shubham Dhyani,2025-05-10,11:38,Late,checkout,11:38:09
+44,Ritika Kaushal,2025-05-10,11:38,Late,checkout,11:38:16
